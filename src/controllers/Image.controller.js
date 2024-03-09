@@ -1,21 +1,29 @@
 import express from "express"
+import { extractText } from "../services/Image.Service.js";
 
 export const imageController = async(req, res) => {
     try{
-        const fileName = req.file.filename;
-        if(fileName){
-            res.json({
-                success : true,
-                message : "Image uploaded successfully",
-                data : fileName
+        // console.log(req.file);
+        const filePath = req.file.path;
+        if(!filePath){
+            return res.json({
+                success : false,
+                message : "Please upload an image"
             })
         }
-        else{
-            res.json({
+
+        const text = await extractText(filePath);
+        if(!text){
+            return res.json({
                 success : false,
-                message : "Image not uploaded"
+                message : "Error extracting text from image try again later"
             })
-        }  
+        }
+        res.json({
+            success : true,
+            message : "Text Extracted Successfully",
+            data : text
+        })
     }catch(error){
         console.log("Error in image Controler" , error);
         res.json({
