@@ -1,6 +1,6 @@
 import express from "express"
 import { extractText } from "../services/Image.Service.js";
-
+import fs from "fs";
 export const imageController = async(req, res) => {
     try{
         // console.log(req.file);
@@ -19,6 +19,7 @@ export const imageController = async(req, res) => {
                 message : "Error extracting text from image try again later"
             })
         }
+        fs.unlinkSync(filePath);
         res.json({
             success : true,
             message : "Text Extracted Successfully",
