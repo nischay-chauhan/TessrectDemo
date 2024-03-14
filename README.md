@@ -43,7 +43,7 @@ Start the server
 
 #### POST IMAGE ROUTE
 
-```http
+```
   POST http://localhost:<PORT>/api/image/upload
 ```
 
@@ -53,7 +53,7 @@ Start the server
 
 #### POST PDF ROUTE
 
-```http
+```
   POST  http://localhost:<PORT>/api/pdf/upload
 ```
 
